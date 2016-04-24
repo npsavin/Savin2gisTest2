@@ -25,6 +25,30 @@ namespace Savin2gisTest2
                 PointForFind =
                     new Point(Convert.ToDouble(StringForStart[1].Replace(".", ",")),
                         Convert.ToDouble(StringForStart[2].Replace(".", ",")));
+            }
+            
+            catch (FormatException)
+            {
+                Console.WriteLine("Неверное значение широты или долготы");
+                Program.ParseFile();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Неверный ввод данных");
+                Program.ParseFile();
+            }
+            catch (InvalidDataException)
+            {
+                Console.WriteLine("Неверный ввод данных");
+                Program.ParseFile();
+            }
+            
+        }
+
+        public void ParseFile()
+        {
+            try
+            {
                 var lines = File.ReadAllLines(@StringForStart[0]);
                 foreach (var line in lines)
                 {
@@ -69,7 +93,7 @@ namespace Savin2gisTest2
             }
             
         }
-
+        
         private static double CalculatDistance(Point point, Point findPoint)
         {
             const double power = 2;
